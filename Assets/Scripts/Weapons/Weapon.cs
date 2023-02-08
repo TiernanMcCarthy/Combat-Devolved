@@ -11,6 +11,16 @@ public class Weapon : MonoBehaviour
     public float magazineSize;
     [Space]
     public float reloadSpeed;
+    [Space]
+    public float reserveAmmo;
+    [Space]
+    public float currentMagazine;
+    [Space]
+    public WeaponState weaponState;
+
+
+
+    public Vector3 defaultRotation;
     
 
 
@@ -19,7 +29,7 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        weaponState = new WS_Ready(); //set weapon to ready;
     }
 
     // Update is called once per frame

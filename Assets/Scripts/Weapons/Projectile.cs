@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [Header("Bullet Properties")]
+    public bool isHitscan = false; //Hitscan for instant hit to target, otherwise projectile should travel
+    [Space]
+    public float baseDamage;
+    [Space]
+    public float shieldMultiplier;
+    [Space]
+    [SerializeField] private Decal impactDecal;
+
     // Start is called before the first frame update
     void Start()
     {
