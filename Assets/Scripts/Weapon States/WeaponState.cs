@@ -7,6 +7,8 @@ public static class WeaponOp
 
     public const int Reloading = 2; //Reloading
 
+    public const int Empty = 3;
+
 
 }
 

@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     [Space]
     public float shieldMultiplier;
     [Space]
+    public float bulletSpeed;
     [SerializeField] private Decal impactDecal;
 
     // Start is called before the first frame update

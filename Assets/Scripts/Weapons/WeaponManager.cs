@@ -44,10 +44,10 @@ public class WeaponManager : MonoBehaviour
         m_weaponCam.gameObject.SetActive(false);
         m_weaponCam.gameObject.SetActive(true);
 
-
-        //lastY = 
-       // lastX = m_mainCamera.transform.eulerAngles.x;
-        originalPosition = currentWeapon.transform.localPosition;
+        if (currentWeapon != null)
+        {
+            originalPosition = currentWeapon.transform.localPosition;
+        }
     }
     //return angle in range -180 to 180
     float NormalizeAngle(float a)
@@ -79,6 +79,10 @@ public class WeaponManager : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            currentWeapon.Fire();
+        }
         
     }
 
