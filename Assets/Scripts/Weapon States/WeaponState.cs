@@ -7,7 +7,9 @@ public static class WeaponOp
 
     public const int Reloading = 2; //Reloading
 
-    public const int Empty = 3;
+    public const int Empty = 3; //Empty Weapon
+
+    public const int Pause = 4; //Weapon Pause between firing
 
 
 }

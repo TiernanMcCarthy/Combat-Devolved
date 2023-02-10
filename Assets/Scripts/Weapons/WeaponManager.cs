@@ -17,6 +17,8 @@ public class WeaponManager : MonoBehaviour
 
     public float minimumSwayForce = 0.3f;
 
+    public Transform firePosition;
+
     public float swaySpeed;
 
     public bool firstPerson; //player flag
@@ -79,10 +81,20 @@ public class WeaponManager : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetAxis("Fire1")!=0)
         {
-            currentWeapon.Fire();
+            currentWeapon.Fire(firePosition);
         }
+
+        if (Input.GetAxis("Reload") != 0)
+        {
+            currentWeapon.ReloadWeapon();
+        }
+
+       // if (Input.GetKeyDown(KeyCode.Mouse0) && currentWeapon.weaponState.OP== WeaponOp.Ready)
+        //{
+           // currentWeapon.Fire(firePosition);
+       // }
         
     }
 

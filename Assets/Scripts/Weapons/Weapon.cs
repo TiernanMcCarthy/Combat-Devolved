@@ -16,10 +16,13 @@ public class Weapon : MonoBehaviour
     [Space]
     public float currentMagazine;
     [Space]
+    public float fireRate = 0.03f;
+    [Space]
     public WeaponState weaponState;
+    
 
 
-    [SerializeField] private List<Projectile> bulletPool; //pool bullets of each weapon to save on instansiating
+    [SerializeField] protected List<Projectile> bulletPool; //pool bullets of each weapon to save on instansiating
 
 
     public Vector3 defaultRotation;
@@ -27,33 +30,31 @@ public class Weapon : MonoBehaviour
 
     protected void SetupBulletPool()
     {
+        
         if (m_proj != null)
         {
             if (!m_proj.isHitscan) //check if projectiles are hitscan, if not, preload the weapon with bullets
             {
-                Projectile tempBullet;
-                if(currentMagazine > 0)
-                {
-                    reserveAmmo += currentMagazine; //add current magazine to reserve ammo
-                    currentMagazine = 0;
-                }
+
+                currentMagazine = 0;
+                int bulletCount = bulletPool.Count;
                 //Fill transform of Weapon with deactivated children 
-                for (int i = 0; i < magazineSize; i++)
+                for (int i = 0; i < magazineSize-bulletCount; i++)
                 {
                     if (reserveAmmo > 0)
                     {
-                        reserveAmmo--; //decrease ammo pool
-                        currentMagazine++;
+                        reserveAmmo-=1; //decrease ammo pool
+                        Projectile tempBullet;
                         tempBullet = Instantiate(m_proj, transform);
                         tempBullet.gameObject.SetActive(false);
                         bulletPool.Add(tempBullet);//disable object for time being;
-
                     }
                     else
                     {
                         break; //exit, no ammo to fill
                     }
                 }
+                currentMagazine = bulletPool.Count;
                 if (currentMagazine > 0)
                 {
                     weaponState = new WS_Ready(); //set weapon to ready;
@@ -68,14 +69,44 @@ public class Weapon : MonoBehaviour
     }
 
 
-
-
-    public virtual void Fire() //overide on a per weapon basis
+    public void ReloadWeapon() //implement proper reload
     {
-        if(bulletPool.Count>0)
+        if (bulletPool.Count < magazineSize)
         {
-
+            weaponState = new WS_Reloading();
+            SetupBulletPool();
         }
+    }
+
+
+    float lastFire = 0;
+    public virtual void Fire(Transform firePosition) //overide on a per weapon basis
+    {
+        if (weaponState.OP == WeaponOp.Pause)
+        {
+            if (Time.time - lastFire >= fireRate)
+            {
+                weaponState = new WS_Ready(); //set weapon state to ready
+            }
+        }
+
+        if (bulletPool.Count>0 && weaponState.OP==WeaponOp.Ready)
+        {
+            bulletPool[0].SetOnPath(firePosition);
+            bulletPool.Remove(bulletPool[0]);
+            currentMagazine--;
+            lastFire = Time.time;
+            if (bulletPool.Count > 0)
+            {
+                weaponState = new WS_Pause();
+            }
+            else
+            {
+                weaponState = new WS_Empty();
+            }
+            // bulletPool[0].
+        }
+
     }
 
 

@@ -14,15 +14,20 @@ public class Projectile : MonoBehaviour
     public float bulletSpeed;
     [SerializeField] private Decal impactDecal;
 
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private Rigidbody rb;
+
+    public void SetOnPath(Transform firePoint)
     {
+        transform.position = firePoint.position;
+        transform.forward = firePoint.forward;
+        gameObject.SetActive(true);
+        transform.parent = null;
+        rb.velocity = transform.forward * bulletSpeed;
+
         
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
