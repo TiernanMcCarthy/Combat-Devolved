@@ -28,7 +28,7 @@ public class Weapon : MonoBehaviour
     public Vector3 defaultRotation;
     
 
-    protected void SetupBulletPool()
+    protected virtual void SetupBulletPool()
     {
         
         if (m_proj != null)
