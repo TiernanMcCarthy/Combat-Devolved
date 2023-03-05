@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour
     [Header("Generic Properties")]
     public Projectile m_proj;
     [Space]
+    public bool canReload;
+    [Space]
     public float magazineSize;
     [Space]
     public float reloadSpeed;
@@ -18,7 +20,9 @@ public class Weapon : MonoBehaviour
     [Space]
     public float fireRate = 0.03f;
     [Space]
-    public WeaponState weaponState;
+    [SerializeField] public WeaponState weaponState;
+    [Space]
+    public TMPro.TMP_Text ammoCount;
     
 
 
@@ -69,6 +73,12 @@ public class Weapon : MonoBehaviour
     }
 
 
+    public virtual void manageWeapon()
+    {
+        ammoCount.text = currentMagazine + "/" + magazineSize;
+    }
+
+
     public void ReloadWeapon() //implement proper reload
     {
         if (bulletPool.Count < magazineSize)
@@ -80,7 +90,7 @@ public class Weapon : MonoBehaviour
 
 
     float lastFire = 0;
-    public virtual void Fire(Transform firePosition) //overide on a per weapon basis
+    public virtual void Fire(Transform firePosition,bool manageStates=true) //overide on a per weapon basis
     {
         if (weaponState.OP == WeaponOp.Pause)
         {
@@ -96,13 +106,17 @@ public class Weapon : MonoBehaviour
             bulletPool.Remove(bulletPool[0]);
             currentMagazine--;
             lastFire = Time.time;
-            if (bulletPool.Count > 0)
+            manageWeapon();
+            if (manageStates)
             {
-                weaponState = new WS_Pause();
-            }
-            else
-            {
-                weaponState = new WS_Empty();
+                if (bulletPool.Count > 0)
+                {
+                    weaponState = new WS_Pause();
+                }
+                else
+                {
+                    weaponState = new WS_Empty();
+                }
             }
             // bulletPool[0].
         }

@@ -1,4 +1,5 @@
 using UnityEngine;
+[System.Serializable]
 public static class WeaponOp
 {
     public const int None = 0; //Unrecognised Weapon State
@@ -10,6 +11,8 @@ public static class WeaponOp
     public const int Empty = 3; //Empty Weapon
 
     public const int Pause = 4; //Weapon Pause between firing
+
+    public const int OverCharge = 5; //Weapon is overcharging
 
 
 }

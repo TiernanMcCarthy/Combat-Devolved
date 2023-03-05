@@ -14,7 +14,7 @@ public class AssaultRifle : Weapon
     }
 
 
-    public override void Fire(Transform firePosition)
+    public override void Fire(Transform firePosition, bool manageStates = true)
     {
         Debug.Log("It's me, the overidden function!");
         base.Fire(firePosition);
