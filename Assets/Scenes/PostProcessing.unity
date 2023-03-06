@@ -623,7 +623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898788738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.423824, y: 9.843011, z: 324.8195}
+  m_LocalPosition: {x: 32.028, y: 9.843011, z: 324.8195}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8387,6 +8387,7 @@ GameObject:
   - component: {fileID: 8943242204989701031}
   - component: {fileID: 8943242204989701034}
   - component: {fileID: 8943242204989701035}
+  - component: {fileID: 8943242204989701036}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -8441,6 +8442,23 @@ MonoBehaviour:
   m_health: 100
   m_alive: 1
   m_aiTarget: 0
+--- !u!114 &8943242204989701036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8943242204989701030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a134e981805e584786c5479925a1124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 1143587745}
+  m_Weapon1: {fileID: 8943242205240800162}
+  m_Weapon2: {fileID: 1143587745}
+  m_WeaponManager: {fileID: 8943242203904162010}
+  grenades: {fileID: 0}
 --- !u!114 &8943242204996542564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8874,7 +8892,7 @@ GameObject:
   - component: {fileID: 8943242205240800161}
   - component: {fileID: 8943242205240800162}
   m_Layer: 3
-  m_Name: Player Rifle
+  m_Name: AssaultRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8925,7 +8943,7 @@ MonoBehaviour:
   reserveAmmo: 1200
   currentMagazine: 0
   fireRate: 0.066
-  ammoCount: {fileID: 0}
+  ammoCount: {fileID: 77560174}
   bulletPool: []
   defaultRotation: {x: 0, y: 0, z: 0}
   m_TextMeshPro: {fileID: 8943242204011600103}
