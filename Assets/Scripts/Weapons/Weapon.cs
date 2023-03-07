@@ -32,6 +32,12 @@ public class Weapon : MonoBehaviour
     public Vector3 defaultRotation;
     
 
+    protected void ClearBulletPool()
+    {
+        bulletPool.Clear();
+    }
+
+
     protected virtual void SetupBulletPool()
     {
         
@@ -75,9 +81,17 @@ public class Weapon : MonoBehaviour
 
     public virtual void manageWeapon()
     {
-        ammoCount.text = currentMagazine + "/" + magazineSize;
-    }
 
+        //ammoCount.text = currentMagazine + "/" + magazineSize;
+    }
+    /// <summary>
+    /// Returns weapon ammo status as a string
+    /// </summary>
+    /// <returns></returns>
+    public virtual string GetWeaponInfo()
+    {
+        return  "MAG " + currentMagazine + "/" + magazineSize + "  TOTAL " + reserveAmmo;
+    }
 
     public void ReloadWeapon() //implement proper reload
     {

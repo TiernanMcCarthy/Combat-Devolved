@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public Weapon currentWeapon;
     public Weapon m_Weapon1;
     public Weapon m_Weapon2;
 
     public WeaponManager m_WeaponManager;
 
     public GameObject grenades; //dummy fix later
+
+    public TMPro.TMP_Text ammoText;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,12 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         
+
+        if(m_WeaponManager.currentWeapon!=null)
+        {
+            ammoText.text= m_WeaponManager.currentWeapon.GetWeaponInfo();
+        }
+
         if(Input.GetKeyUp(KeyCode.Tab))
         {
 

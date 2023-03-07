@@ -759,6 +759,7 @@ MonoBehaviour:
   ammoCount: {fileID: 77560174}
   bulletPool: []
   defaultRotation: {x: 0, y: 0, z: 0}
+  shotCapacity: 100
   fireCost: 12
   overChargeReduction: 15
   maxOvercharge: 100
@@ -8459,6 +8460,7 @@ MonoBehaviour:
   m_Weapon2: {fileID: 1143587745}
   m_WeaponManager: {fileID: 8943242203904162010}
   grenades: {fileID: 0}
+  ammoText: {fileID: 77560174}
 --- !u!114 &8943242204996542564
 MonoBehaviour:
   m_ObjectHideFlags: 0

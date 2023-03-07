@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlasmaRifle : Weapon
 {
     [Header("Plasma Rifle Specifics")]
+    public float shotCapacity = 100;
     public float fireCost; //cost for overheat
     [Space]
     public float overChargeReduction;
@@ -42,6 +43,13 @@ public class PlasmaRifle : Weapon
     }
 
 
+    public override string GetWeaponInfo()
+    {
+        //ammoCount.text = overcharge + "/" + maxOvercharge;
+        string info = "Ammo: " + shotCapacity+ "  " + overcharge + "/" + maxOvercharge;
+        return info;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +61,6 @@ public class PlasmaRifle : Weapon
     private void manageOvercharge()
     {
         overcharge = Mathf.Clamp(overcharge - overChargeReduction*Time.deltaTime,0, 100);
-        ammoCount.text = overcharge + "/" + maxOvercharge;
         Debug.Log(weaponState.OP);
         if (weaponState.OP==WeaponOp.OverCharge)
         {
@@ -78,8 +85,14 @@ public class PlasmaRifle : Weapon
     public override void manageWeapon()
     {
         //base.manageWeapon();
-        overcharge += fireCost;
-        //Debug.Log("WHY");
+        overcharge += fireCost; //increase overcharge
+        shotCapacity-=shotCost; //decrease ammo capacity
+        if(shotCapacity<=0)
+        {
+            weaponState = new WS_Empty();
+            ClearBulletPool();
+        }
+        
     }
 
     public override void Fire(Transform firePosition,bool manageStates=true)
@@ -88,8 +101,7 @@ public class PlasmaRifle : Weapon
         {
             if (weaponState.OP == WeaponOp.Ready)
             {
-                //overcharge += fireCost;
-               // Debug.Log("WHY");
+                
             }
             base.Fire(firePosition,true);
 
