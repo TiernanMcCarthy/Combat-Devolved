@@ -74,7 +74,6 @@ public class PlasmaRifle : Weapon
     // Update is called once per frame
     void Update()
     {
-        manageOvercharge();
         if(Time.time-lastPoolIncrease>=increasePool)
         {
             SetupBulletPool();
@@ -82,9 +81,16 @@ public class PlasmaRifle : Weapon
         }
     }
 
+    public override void UpdateWeapon()
+    {
+        manageOvercharge();
+        //base.UpdateWeapon();
+    }
+
     public override void manageWeapon()
     {
         //base.manageWeapon();
+
         overcharge += fireCost; //increase overcharge
         shotCapacity-=shotCost; //decrease ammo capacity
         if(shotCapacity<=0)

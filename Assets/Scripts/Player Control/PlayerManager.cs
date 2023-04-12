@@ -18,10 +18,22 @@ public class PlayerManager : MonoBehaviour
         
     }
 
+    private void UpdateWeapons()
+    {
+        if(m_WeaponManager != null)
+        {
+            m_Weapon1.UpdateWeapon();
+        }
+        if(m_Weapon2!=null)
+        {
+            m_Weapon2.UpdateWeapon();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateWeapons();
 
         if(m_WeaponManager.currentWeapon!=null)
         {

@@ -79,10 +79,16 @@ public class Weapon : MonoBehaviour
     }
 
 
+
+    public virtual void UpdateWeapon()
+    {
+
+    }
+
+
     public virtual void manageWeapon()
     {
 
-        //ammoCount.text = currentMagazine + "/" + magazineSize;
     }
     /// <summary>
     /// Returns weapon ammo status as a string
@@ -93,13 +99,21 @@ public class Weapon : MonoBehaviour
         return  "MAG " + currentMagazine + "/" + magazineSize + "  TOTAL " + reserveAmmo;
     }
 
-    public void ReloadWeapon() //implement proper reload
+    public IEnumerator ReloadWeapon() //implement proper reload
     {
-        if (bulletPool.Count < magazineSize)
-        {
-            weaponState = new WS_Reloading();
-            SetupBulletPool();
-        }
+
+            Debug.Log("YGOOOO");
+            if (bulletPool.Count < magazineSize)
+            {
+                weaponState = new WS_Reloading();
+                yield return new WaitForSeconds(reloadSpeed);
+            if (gameObject.activeSelf) // a weapon must be held to be reloaded
+            {
+                SetupBulletPool();
+            }
+            }
+        
+        
     }
 
 

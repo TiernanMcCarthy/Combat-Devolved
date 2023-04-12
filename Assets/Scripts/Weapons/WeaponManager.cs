@@ -27,6 +27,7 @@ public class WeaponManager : MonoBehaviour
 
     private float lastX; //X =Vertical
 
+    
 
 
     Vector3 originalPosition;
@@ -72,6 +73,11 @@ public class WeaponManager : MonoBehaviour
        
     }
 
+    private void UpdateWeapons()
+    {
+        //weapon
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -88,13 +94,10 @@ public class WeaponManager : MonoBehaviour
 
         if (Input.GetAxis("Reload") != 0)
         {
-            currentWeapon.ReloadWeapon();
+            StartCoroutine(currentWeapon.ReloadWeapon());
+            //currentWeapon.ReloadWeapon();
         }
 
-       // if (Input.GetKeyDown(KeyCode.Mouse0) && currentWeapon.weaponState.OP== WeaponOp.Ready)
-        //{
-           // currentWeapon.Fire(firePosition);
-       // }
         
     }
 
